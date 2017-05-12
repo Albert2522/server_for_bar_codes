@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512050256) do
+ActiveRecord::Schema.define(version: 20170512213827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "upc", force: :cascade do |t|
+  create_table "upcs", force: :cascade do |t|
     t.text     "product_name", null: false
     t.text     "upc",          null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["upc"], name: "index_upc_on_upc", unique: true, using: :btree
+    t.index ["upc"], name: "index_upcs_on_upc", unique: true, using: :btree
   end
 
 end
