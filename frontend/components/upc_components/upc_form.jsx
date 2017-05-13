@@ -17,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   fetchUpc: id => dispatch(fetchUpc(id)),
   fetchUpcs: () => dispatch(fetchUpcs()),
   receiveUpcs: upcs => dispatch(receiveUpcs(upcs)),
-  deleteUpc: id => dispatch(deleteUpc)
+  deleteUpc: id => dispatch(deleteUpc(id))
 });
 
 
@@ -29,20 +29,21 @@ class UpcForm extends React.Component {
       upc: ""
     };
     this._handleSubmit = this._handleSubmit.bind(this);
+    this._deleteUpc = this._deleteUpc.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchUpcs();
   }
 
-  componentWillReceiveProps(newProps) {
-    console.log(newProps);
-  }
-
   _handleSubmit(e) {
     e.preventDefault();
     const upc = this.state;
     this.props.createUpc(upc);
+  }
+
+  _deleteUpc(id) {
+    this.props.deleteUpc(id);
   }
 
   update(name) {
@@ -53,7 +54,7 @@ class UpcForm extends React.Component {
     return(
       <div>
         <div>
-          <ul>
+          <ul id="errors_ul">
           {this.props.upcErrors.map((err) => (
             <li key={err}>
               {err}
@@ -74,10 +75,15 @@ class UpcForm extends React.Component {
               Total {this.props.upcs.length} UPCs
         </div>
         <div>
-          <ul>
-          {this.props.upcs.map((upc) => (
-            <li key={upc.upc}>
-              {upc.product_name} {upc.upc}
+          <ul id="upcs_ul">
+          {this.props.upcs.map((upc, index) => (
+            <li id="upcs_li" key={upc.upc}>
+              <div> {index + 1} </div>
+              <div> {upc.product_name} </div>
+              <div> {upc.upc}
+                <button onClick={() => this._deleteUpc(upc.id)} id="delete_button">Delete</button>
+              </div>
+
             </li>
           )) }
           </ul>

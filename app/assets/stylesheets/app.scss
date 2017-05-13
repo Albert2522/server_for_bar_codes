@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  min-width: 400px;
 }
 
 .form .input {
@@ -9,9 +10,32 @@
   padding: 5px;
 }
 
+#delete_button {
+  margin-left: 15px;
+}
+
 #total_upc {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 10;
+}
+
+#errors_ul {
+  font-weight: bold;
+  color: red;
+}
+
+#upcs_ul {
+  list-style-type: none;
+}
+
+
+#upcs_li {
+  margin-left: 25%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 50%;
 }

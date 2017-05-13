@@ -10,17 +10,31 @@ class Api::UpcsController < ApplicationController
   end
 
   def show
-    @upc = Upc.find_by_upc(upc_params[:upc])
+    if (params[:id])
+      @upc = Upc.find_by_id(params[:id])
+    end
+    if @upc.nil?
+      @upc = Upc.find_by_upc(params[:id])
+    end
+
+    if @upc.nil?
+      render json: {error: "No such UPC"}
+      return
+    end
   end
 
   def index
     @upcs = Upc.all
   end
 
+  def find
+
+  end
+
   def destroy
-    upc = Upc.find_by_upc(upc_params[:upc])
-    upc.destroy
-    render "api/upcs/index"
+    @upc = Upc.find_by_id(params[:id])
+    @upc.destroy
+    render "api/upcs/show"
   end
 
   private
